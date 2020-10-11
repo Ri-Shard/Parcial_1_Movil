@@ -16,7 +16,7 @@ class DetallesMateria extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('${this.subjectName}'),
-                backgroundColor: Color.fromARGB(100,255, 0, 56),
+                backgroundColor: Color.fromARGB(100,255, 8, 100),
 
       ),
       body: _buildBody(context),
@@ -30,7 +30,7 @@ class DetallesMateria extends StatelessWidget {
         FatButton(
           color1: Color(0xFFEF4005),
           color2: Color(0xFFEF4059),
-          icon: FontAwesomeIcons.info,
+          icon: FontAwesomeIcons.brain,
           texto: 'Corte 1',
           onPress: () {
             Navigator.push(
@@ -44,7 +44,7 @@ class DetallesMateria extends StatelessWidget {
         FatButton(
           color1: Color(0xFFEF4005),
           color2: Color(0xFFEF4059),
-          icon: FontAwesomeIcons.info,
+          icon: FontAwesomeIcons.brain,
           texto: 'Corte 2',
           onPress: () {
             Navigator.push(
@@ -58,7 +58,7 @@ class DetallesMateria extends StatelessWidget {
         FatButton(
           color1: Color(0xFFEF4005),
           color2: Color(0xFFEF4059),
-          icon: FontAwesomeIcons.info,
+          icon: FontAwesomeIcons.brain,
           texto: 'Corte 3',
           onPress: () {
             Navigator.push(

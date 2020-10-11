@@ -15,7 +15,6 @@ class _DetalleCorteState extends State<DetalleCorte> {
       appBar: AppBar(
         title: Text('Numero Corte'),
                 backgroundColor: Color.fromARGB(100,255, 0, 56),
-
         actions: [
           IconButton(
               icon: Icon(Icons.add),
