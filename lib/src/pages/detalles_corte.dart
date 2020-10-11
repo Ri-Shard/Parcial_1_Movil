@@ -103,7 +103,7 @@ class _DetalleCorteState extends State<DetalleCorte> {
                           Text(
                             '4.0',
                             style: TextStyle(
-                              color: Colors.green,
+                              color: Colors.red[200],
                               fontSize: _diagonalSize * 0.15,
                               fontWeight: FontWeight.bold,
                             ),

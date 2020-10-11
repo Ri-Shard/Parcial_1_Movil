@@ -43,7 +43,7 @@ class FatButton extends StatelessWidget {
                 //FontAwesomeIcons.carCrash,
                 this.icon,
                 color: Colors.white,
-                size: 40,
+                size: 30,
               ),
               SizedBox(width: 20),
               Expanded(
@@ -51,7 +51,7 @@ class FatButton extends StatelessWidget {
                   this.texto,
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 18,
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
