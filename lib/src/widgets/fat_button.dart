@@ -19,7 +19,7 @@ class FatButton extends StatelessWidget {
     this.color1 = Colors.grey,
     this.color2 = Colors.blueGrey,
     this.onPress,
-    this.notaCorte = '5.00',
+    this.notaCorte = '0.00',
   });
   @override
   Widget build(BuildContext context) {

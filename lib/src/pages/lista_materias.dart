@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:parcial1/src/bloc/materia_controller.dart';
 import 'package:parcial1/src/models/subject_model.dart';
 import 'package:parcial1/src/pages/detalles_materia.dart';
+import 'package:parcial1/src/provider/db.dart';
 
 class ListaMaterias extends StatefulWidget {
   @override
@@ -15,13 +16,28 @@ class ListaMaterias extends StatefulWidget {
 class _ListaMateriasState extends State<ListaMaterias> {
   final controllerNombreMateriaText = TextEditingController();
 
+  String name;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Lista de materias'),
-        backgroundColor: Color.fromARGB(100,255, 0, 56),
+        backgroundColor: Color.fromARGB(100, 255, 0, 56),
         actions: [
+                    Padding(
+            padding: const EdgeInsets.only(right: 15, top: 20),
+            child: GestureDetector(
+              child: Text(
+                'Actualizar',
+                style: TextStyle(color: Colors.white),
+              ),
+              onTap: () async {
+                await DBProvider.db.getTodasMaterias();
+                setState(() {});
+              },
+            ),
+          ),
           IconButton(
               icon: Icon(Icons.add),
               onPressed: () {
@@ -43,21 +59,21 @@ class _ListaMateriasState extends State<ListaMaterias> {
         children: [
           Expanded(
             child: GetBuilder(
-                init: MateriaController(),
-                builder: (snapshot) {
-                  return FutureBuilder<List<SubjectModel>>(
-                      future: snapshot.consultarMaterias(),
-                      builder: (context, snapshot) {
-                        return (snapshot.data == null)
-                            ? Center(child: Text('No hay datos'))
-                            : ListView.builder(
-                                physics: BouncingScrollPhysics(),
-                                itemCount: snapshot.data.length,
-                                itemBuilder: (context, index) {
-                                  return ListTile(
-                                    leading: (snapshot.data[index].definitiva ==
-                                            null)
-                                        ? Text('0',
+              init: MateriaController(),
+              builder: (snapshot) {
+                return FutureBuilder<List<SubjectModel>>(
+                  future: snapshot.consultarMaterias(),
+                  builder: (context, snapshot) {
+                    return (snapshot.data == null)
+                        ? Center(child: Text('No hay datos'))
+                        : ListView.builder(
+                            physics: BouncingScrollPhysics(),
+                            itemCount: snapshot.data.length,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                leading:
+                                    (snapshot.data[index].definitiva == null)
+                                        ? Text('${index+1}',
                                             style: TextStyle(
                                                 fontSize: _diagonalSize * 0.03))
                                         : Text(
@@ -67,56 +83,38 @@ class _ListaMateriasState extends State<ListaMaterias> {
                                                 fontSize: _diagonalSize * 0.03),
                                             overflow: TextOverflow.ellipsis,
                                           ),
-                                    title: Text(
-                                      snapshot.data[index].subjectName,
-                                      style: TextStyle(
-                                          fontSize: _diagonalSize * 0.03),
-                                      overflow: TextOverflow.ellipsis,
+                                title: Text(
+                                  snapshot.data[index].subjectName,
+                                  style:
+                                      TextStyle(fontSize: _diagonalSize * 0.03),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                trailing: Icon(
+                                  Icons.chevron_right,
+                                  size: _diagonalSize * 0.03,
+                                ),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    CupertinoPageRoute(
+                                      builder: (context) => DetallesMateria(
+                                        subjectName:
+                                            snapshot.data[index].subjectName,
+                                            id: 
+                                            snapshot.data[index].idS,
+                                      ),
                                     ),
-                                    trailing: Icon(
-                                      Icons.chevron_right,
-                                      size: _diagonalSize * 0.03,
-                                    ),
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        CupertinoPageRoute(
-                                          builder: (context) => DetallesMateria(
-                                            subjectName: snapshot
-                                                .data[index].subjectName,
-                                          ),
-                                        ),
-                                      );
-                                    },
                                   );
                                 },
                               );
-                      },);
-                },),
-          ),
-          Divider(),
-          Container(
-            width: _sizeWidth,
-            height: _sizeHeight * 0.3,
-            // height: _sizeHeight * 0.5,
-            // color: Colors.red,
-            child: Column(
-              children: [
-                Text(
-                  '5.0',
-                  style: TextStyle(
-                    color: Colors.red[200],
-                    fontSize: _diagonalSize * 0.15,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  'Que pro',
-                  style: TextStyle(fontSize: _diagonalSize * 0.04),
-                )
-              ],
+                            },
+                          );
+                  },
+                );
+              },
             ),
           ),
+          Divider(),
         ],
       ),
     );
@@ -130,21 +128,25 @@ class _ListaMateriasState extends State<ListaMaterias> {
         return AlertDialog(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-          title: Text('Agregar materia'),
+          title: Text('Agregar Materia'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               TextField(
-                // controller: controllerNombreText,
-                //autofocus: true,
-                textCapitalization: TextCapitalization.sentences,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20.0)),
-                  hintText: 'Nombre de la materia',
-                  // labelText: 'Nombre de materia',
-                ),
-              ),
+                  // controller: controllerNombreText,
+                  //autofocus: true,
+
+                  textCapitalization: TextCapitalization.sentences,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20.0)),
+                    hintText: 'Nombre de la materia',
+                  ),
+                  onChanged: (valor) {
+                    setState(() {
+                      name = valor;
+                    });
+                  }),
             ],
           ),
           actions: <Widget>[
@@ -155,10 +157,10 @@ class _ListaMateriasState extends State<ListaMaterias> {
             FlatButton(
               child: Text('Ok'),
               onPressed: () {
-                final nuevaMateria = SubjectModel(
-                  subjectName: 'Cálculo prueba',
+                final newSubject = SubjectModel(
+                  subjectName: '${this.name}',
                 );
-                MateriaController.guardarMateria(nuevaMateria);
+                MateriaController.guardarMateria(newSubject);
                 setState(() {});
                 Navigator.of(context).pop();
               },

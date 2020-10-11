@@ -11,4 +11,7 @@ class MateriaController extends GetxController {
   Future<List<SubjectModel>> consultarMaterias() async {
     return await DBProvider.db.getTodasMaterias();
   }
+    static void deleteSubject(int id) async {
+    await DBProvider.db.deleteMateria(id);
+  }
 }
