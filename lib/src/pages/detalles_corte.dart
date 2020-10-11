@@ -1,6 +1,9 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:parcial1/src/bloc/actividad_controller.dart';
 import 'package:parcial1/src/models/activity_model.dart';
 
 class DetalleCorte extends StatefulWidget {
@@ -47,6 +50,22 @@ class _DetalleCorteState extends State<DetalleCorte> {
                   hintText: 'Nombre de la actividad',
                 ),
               ),
+                            TextField(
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20.0)),
+                  hintText: 'Id',
+                ),
+              ),
+                   TextField(
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                     borderRadius: BorderRadius.circular(20.0)),
+                  hintText: 'Nota',
+                ),
+              ),
               TextField(
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
@@ -55,6 +74,7 @@ class _DetalleCorteState extends State<DetalleCorte> {
                   hintText: '%',
                 ),
               ),
+
             ],
           ),
           actions: <Widget>[
@@ -68,7 +88,8 @@ class _DetalleCorteState extends State<DetalleCorte> {
                 final newActivity = ActivityModel(
                   activityName: 'parcial1',
                 );
-                //ActividadController.nuevaActividad(nuevaMateria);
+                ActivityController.saveActivity(newActivity);
+               // MateriaController.
                 Navigator.of(context).pop();
               },
             ),
@@ -100,7 +121,7 @@ class _DetalleCorteState extends State<DetalleCorte> {
                       child: Column(
                         children: [
                           Text(
-                            '4.0',
+                            '0.0',
                             style: TextStyle(
                               color: Colors.red[200],
                               fontSize: _diagonalSize * 0.15,
@@ -119,7 +140,7 @@ class _DetalleCorteState extends State<DetalleCorte> {
               ),
             ],
           ),
-          Container(
+/*           Container(
             // color: Colors.blue,
             height: _sizeHeight * 0.55,
             child: ListView.builder(
@@ -128,44 +149,56 @@ class _DetalleCorteState extends State<DetalleCorte> {
               itemBuilder: (context, index) {
                 return Column(
                   children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            // controller: controllerNombreText,
-                            //autofocus: true,
-                            textCapitalization: TextCapitalization.sentences,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20.0)),
-                              hintText: 'Nombre de la actividad',
-                              // labelText: 'Nombre de materia',
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 5),
-                        SizedBox(
-                          width: 50,
-                          child: TextField(
-                            // controller: controllerNombreText,
-                            //autofocus: true,
-                            keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20.0)),
-                              hintText: '%',
-                              // labelText: 'Nombre de materia',
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Divider(),
-                  ],
+          Expanded(
+            child: GetBuilder(
+              init: ActivityController(),
+              builder: (snapshot) {
+                return FutureBuilder<List<ActivityModel>>(
+                  future: snapshot.allActivities(),
+                  builder: (context, snapshot) {
+                    return (snapshot.data == null)
+                        ? Center(child: Text('No hay datos'))
+                        : ListView.builder(
+                            physics: BouncingScrollPhysics(),
+                            itemCount: snapshot.data.length,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                leading:
+                                    (snapshot.data[index].activityName == null)
+                                        ? Text('${index+1}',
+                                            style: TextStyle(
+                                                fontSize: _diagonalSize * 0.03))
+                                        : Text(
+                                            snapshot.data[index].activityNote
+                                                .toString(),
+                                            style: TextStyle(
+                                                fontSize: _diagonalSize * 0.03),
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                title: Text(
+                                  snapshot.data[index].activityName,
+                                  style:
+                                      TextStyle(fontSize: _diagonalSize * 0.03),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                trailing: Icon(
+                                  Icons.chevron_right,
+                                  size: _diagonalSize * 0.03,
+                                ),
+                              );
+                            },
+                          );
+                  },
                 );
               },
             ),
           ),
+          Divider(),
+        ],
+                );
+              },
+            ),
+          ), */
         ],
       ),
     );

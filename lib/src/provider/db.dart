@@ -92,7 +92,7 @@ class DBProvider {
   //Registrar actividad
   nuevaActividad(ActivityModel nuevaActividad) async {
     final db = await database;
-    final res = await db.insert('Materias', nuevaActividad.toJson());
+    final res = await db.insert('Activity', nuevaActividad.toJson());
     return res;
   }
 

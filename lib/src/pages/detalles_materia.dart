@@ -48,7 +48,7 @@ void _deleteSubject(BuildContext context){
               onPressed: () {
                 MateriaController.deleteSubject(this.id);
                 Navigator.of(context).pop();
-                                Navigator.of(context).pop();
+                Navigator.of(context).pop();
 
               },
             ),
