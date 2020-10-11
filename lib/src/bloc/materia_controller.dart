@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:parcial1/src/models/subject_model.dart';
-import 'package:parcial1/src/provider/db_promedio.dart';
+import 'package:parcial1/src/provider/db.dart';
 
 
 class MateriaController extends GetxController {

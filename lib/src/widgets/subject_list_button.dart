@@ -11,7 +11,6 @@ class FatButton extends StatelessWidget {
   final Color color2;
   @required
   final Function onPress;
-  final String notaCorte;
 
   const FatButton({
     this.icon = FontAwesomeIcons.circle,
@@ -19,7 +18,6 @@ class FatButton extends StatelessWidget {
     this.color1 = Colors.grey,
     this.color2 = Colors.blueGrey,
     this.onPress,
-    this.notaCorte = '5.00',
   });
   @override
   Widget build(BuildContext context) {
@@ -37,7 +35,7 @@ class FatButton extends StatelessWidget {
             children: [
               SizedBox(
                 height: 100,
-                width: 20,
+                width: 40,
               ),
               FaIcon(
                 //FontAwesomeIcons.carCrash,
@@ -55,16 +53,6 @@ class FatButton extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-              Text(
-                '${this.notaCorte}',
-                style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-              ),
-              SizedBox(
-                width: 10.0,
               ),
               FaIcon(
                 FontAwesomeIcons.chevronRight,
