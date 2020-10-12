@@ -5,6 +5,7 @@ class ActivityModel {
   int percent;
   int corte;
 
+
   ActivityModel({
     this.idA,
     this.activityName,
@@ -17,7 +18,7 @@ class ActivityModel {
       new ActivityModel(
         idA: json["idA"],
         activityName: json["activityName"],
-        activityNote: json["activityNote"],
+        activityNote: json["activityNote"] / 1,
         percent: json["percent"],
         corte: json["corte"],
       );

@@ -48,24 +48,20 @@ class DBProvider {
     );
   }
 
-  //MATERIAS--------------------------------------------------------
-
-  //Registrar materia
+//Materia
   nuevaMateria(SubjectModel nuevaMateria) async {
     final db = await database;
     final res = await db.insert('Subject', nuevaMateria.toJson());
     return res;
   }
 
-  //Buscar materia  ID
-  Future<SubjectModel> getMateriaId(int id) async {
+  Future<SubjectModel> getSubjectId(int id) async {
     final db = await database;
     final res = await db.query('Subject', where: 'idS = ?', whereArgs: [id]);
     return res.isNotEmpty ? SubjectModel.fromJson(res.first) : null;
   }
 
-  //Consultar todos
-  Future<List<SubjectModel>> getTodasMaterias() async {
+  Future<List<SubjectModel>> getAllSubject() async {
     final db = await database;
     final res = await db.query('Subject');
 
@@ -74,36 +70,31 @@ class DBProvider {
     return list;
   }
 
-  //Actualizar materia  ID
-  Future<int> updateMateria(SubjectModel nuevaMateria) async {
+  Future<int> updateSubject(SubjectModel nuevaMateria) async {
     final db = await database;
     final res = await db.update('Subject', nuevaMateria.toJson(),
         where: 'idS = ?', whereArgs: [nuevaMateria.idS]);
     return res;
   }
 
-  //Eliminar materia  ID
-  Future<int> deleteMateria(int id) async {
+  Future<int> deleteSubject(int id) async {
     final db = await database;
     final res = await db.delete('Subject', where: 'idS = ?', whereArgs: [id]);
     return res;
   }
-
-  //Registrar actividad
+//Actividad
   nuevaActividad(ActivityModel nuevaActividad) async {
     final db = await database;
     final res = await db.insert('Activity', nuevaActividad.toJson());
     return res;
   }
 
-  //Buscar actividad  ID
   Future<ActivityModel> getActividadId(int id) async {
     final db = await database;
     final res = await db.query('Activity', where: 'idA = ?', whereArgs: [id]);
     return res.isNotEmpty ? ActivityModel.fromJson(res.first) : null;
   }
 
-  //Consultar todos
   Future<List<ActivityModel>> getTodasActividades() async {
     final db = await database;
     final res = await db.query('Activity');
@@ -114,7 +105,6 @@ class DBProvider {
     return list;
   }
 
-  //Actualizar actividad ID
   Future<int> updateActividad(ActivityModel nuevaActividad) async {
     final db = await database;
     final res = await db.update('Activity', nuevaActividad.toJson(),
@@ -122,7 +112,6 @@ class DBProvider {
     return res;
   }
 
-  //Eliminar actividad ID
   Future<int> deleteActividad(int id) async {
     final db = await database;
     final res = await db.delete('Activity', where: 'idA = ?', whereArgs: [id]);

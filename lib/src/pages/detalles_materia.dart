@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:parcial1/src/bloc/materia_controller.dart';
-import 'package:parcial1/src/models/subject_model.dart';
 import 'package:parcial1/src/widgets/fat_button.dart';
 
 import 'detalles_corte.dart';
@@ -58,6 +57,8 @@ void _deleteSubject(BuildContext context){
     );
 
 }
+  
+  
   Widget _createFatButtons(BuildContext context) {
     return Column(
       children: [

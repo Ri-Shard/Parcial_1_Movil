@@ -7,6 +7,7 @@ class SubjectModel {
   double tecerCorte;
   double definitiva;
 
+
   SubjectModel({
     this.idS,
     this.subjectName,

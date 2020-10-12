@@ -4,8 +4,8 @@ import 'package:parcial1/src/provider/db.dart';
 
 
 class ActivityController extends GetxController {
-  static void saveActivity(ActivityModel nuevaActividad) async {
-    await DBProvider.db.nuevaActividad(nuevaActividad);
+  static void saveActivity(ActivityModel newActivity) async {
+    await DBProvider.db.nuevaActividad(newActivity);
   }
 
   Future<List<ActivityModel>> allActivities() async {
@@ -13,5 +13,8 @@ class ActivityController extends GetxController {
   }
     static void deleteActivity(int id) async {
     await DBProvider.db.deleteActividad(id);
+  }
+    static void updateActivity(ActivityModel newActivity) async {
+    await DBProvider.db.updateActividad(newActivity);
   }
 }

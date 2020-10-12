@@ -33,7 +33,7 @@ class _ListaMateriasState extends State<ListaMaterias> {
                 style: TextStyle(color: Colors.white),
               ),
               onTap: () async {
-                await DBProvider.db.getTodasMaterias();
+                await DBProvider.db.getAllSubject();
                 setState(() {});
               },
             ),
@@ -45,11 +45,11 @@ class _ListaMateriasState extends State<ListaMaterias> {
               })
         ],
       ),
-      body: _construirBody(context),
+      body: _buildBody(context),
     );
   }
 
-  Widget _construirBody(BuildContext context) {
+  Widget _buildBody(BuildContext context) {
     final double _sizeWidth = MediaQuery.of(context).size.width;
     final double _sizeHeight = MediaQuery.of(context).size.height;
     final double _diagonalSize =
@@ -140,7 +140,7 @@ class _ListaMateriasState extends State<ListaMaterias> {
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20.0)),
-                    hintText: 'Nombre de la materia',
+                    hintText: 'Nombre de materia',
                   ),
                   onChanged: (valor) {
                     setState(() {
